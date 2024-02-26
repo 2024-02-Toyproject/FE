@@ -1,0 +1,45 @@
+.BackBtn {
+  width: 50px;
+  height: 50px;
+  margin: 15px 30px;
+  cursor: pointer;
+}
+
+.RegisterContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.RegisterTitle {
+  font-size: 30px;
+}
+
+.RegisterInputBox {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid gray;
+  outline: none;
+  width: 300px;
+  font-size: 15px;
+}
+
+.FormTitle {
+  font-weight: bold;
+}
+
+.RegisterGender {
+  margin-right: 20px;
+}
+
+.RegisterBday {
+  width: 120px;
+  font-size: 15px;
+}
+
+.RegisterBtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
