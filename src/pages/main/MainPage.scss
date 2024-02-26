@@ -1,0 +1,31 @@
+$blue: #228be6; // 주석 선언
+
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+}
+
+.ProductBtn {
+  background: $blue; // 주석 사용
+  color: white;
+  outline: none;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  height: 4.5rem;
+  width: 10rem;
+  font-size: 1.4rem;
+  margin: 10px;
+
+  &:hover {
+    background: lighten($blue, 10%); // 색상 10% 밝게
+  }
+
+  &:active {
+    background: darken($blue, 10%); // 색상 10% 어둡게
+  }
+}
