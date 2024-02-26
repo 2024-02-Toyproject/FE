@@ -1,0 +1,34 @@
+.LoginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20vh;
+}
+
+.LoginTitle {
+  font-size: 50px;
+}
+
+.InputBox {
+  outline: none;
+  border: none;
+  background: rgb(201, 240, 255);
+  border-radius: 12px;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 10px;
+  padding: 0 20px;
+  height: 50px;
+  font-size: 20px;
+}
+.InputBox:focus::placeholder {
+  color: transparent;
+}
+
+.ButtonDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
