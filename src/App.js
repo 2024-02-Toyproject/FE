@@ -8,6 +8,7 @@ import DepositPage from './pages/product/DepositPage';
 import SavingsPage from './pages/product/SavingsPage';
 import LoanPage from './pages/product/LoanPage';
 import EtcPage from './pages/product/EtcPage';
+import MyPage from './pages/my/MyPage';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/savings" element={<SavingsPage />} />
         <Route path="/loan" element={<LoanPage />} />
         <Route path="/etc" element={<EtcPage />} />
+
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
     </BrowserRouter>
   );
