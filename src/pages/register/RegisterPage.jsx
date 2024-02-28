@@ -46,7 +46,7 @@ export default function RegisterPage() {
 
   const onClickRegister = () => {
     axios
-      .post('http://localhost:8080/member/save', {
+      .post('/member/save', {
         id: registerId,
         pw: registerPw,
         name: registerName,
