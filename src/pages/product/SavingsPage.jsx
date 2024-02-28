@@ -1,26 +1,22 @@
 import { useState } from 'react';
 import Header from '../../components/Header';
+import SearchBar from '../../components/SearchBar';
 // import './SavingsPage.scss';
 
 export default function SavingsPage() {
-  const [inputSavings, setInputSavings] = useState('');
+  const [savingsList, setSavingsList] = useState('');
 
-  const handleInputSavings = (e) => {
-    setInputSavings(e.target.value);
+  const handleSavingsList = (savingsData) => {
+    setSavingsList(savingsData);
   };
 
   return (
     <div>
       <Header />
-      <h1>적금</h1>
-      <input
-        className="InputBox"
-        type="text"
-        name="input_search_savings"
-        value={inputSavings}
-        onChange={handleInputSavings}
-        placeholder="검색어를 입력해주세요"
-      ></input>
+      <div className="ProductContainer">
+        <h1>적금</h1>
+        <SearchBar onDataTransfer={handleSavingsList} type="savings" />
+      </div>
     </div>
   );
 }

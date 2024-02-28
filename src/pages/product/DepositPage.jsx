@@ -21,7 +21,7 @@ export default function DepositPage() {
     setDepositLikeList(updatedLikeList);
 
     axios
-      .post('http://loginhost:8000/deposit', {
+      .post('http://loginhost:8080/deposit', {
         likeIndex: index,
       })
       .then((res) => {
@@ -39,7 +39,7 @@ export default function DepositPage() {
       <Header />
       <div className="ProductContainer">
         <h1>예금</h1>
-        <SearchBar onDataTransfer={handleDepositList} type="deposit" />
+        <SearchBar onDataTransfer={handleDepositList} type="fixedDeposit" />
         <div>
           <table className="ProductTable">
             <thead>

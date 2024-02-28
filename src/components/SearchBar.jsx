@@ -12,7 +12,7 @@ export default function SearchBar({ onDataTransfer, type }) {
 
   const onClickSearch = () => {
     axios
-      .post(`http://loginhost:8000/${type}`, {
+      .post(`http://localhost:8080/${type}`, {
         searchWord: searchWord,
       })
       .then((res) => {
