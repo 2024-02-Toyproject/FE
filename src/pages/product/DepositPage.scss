@@ -5,40 +5,17 @@
   align-items: center;
 }
 
-.SearchBar {
-  width: 450px;
-  height: 50px;
-  border-radius: 12px;
-  border: solid 1px gray;
-  background: rgb(201, 240, 255);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  opacity: 1;
-  padding: 5px 10px;
+.ProductTable {
+  margin: 30px;
 }
 
-.InputSearch {
-  width: 400px;
-  border: none;
-  outline: none;
-  background: transparent;
-  text-align: center;
-  margin-left: 10px;
-  font-size: 20px;
-  color: gray;
-  overflow: auto; //검색어가 길어졌을때 오른쪽으로 자연스럽게 검색되도록 하기 위해
-}
-.InputSearch:focus::placeholder {
-  color: transparent;
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-.SearchBtn {
-  background: transparent;
-  border: none;
-  font-size: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+th {
+  background-color: #f2f2f2;
 }
