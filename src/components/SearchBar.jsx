@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
+import './SearchBar.scss';
 
 export default function SearchBar({ onDataTransfer, type }) {
   const [searchWord, setSearchWord] = useState('');
