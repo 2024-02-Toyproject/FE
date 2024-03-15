@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Button';
 import Header from '../../components/Header';
 import './MainPage.scss';
 
@@ -14,8 +13,8 @@ export default function MainPage() {
   const onClickLoan = () => {
     navigate('/loan');
   };
-  const onClickEtc = () => {
-    navigate('/etc');
+  const onClickTaxSaving = () => {
+    navigate('/taxSaving');
   };
 
   return (
@@ -45,8 +44,12 @@ export default function MainPage() {
             <button type="button" className="ProductBtn" onClick={onClickLoan}>
               신용대출
             </button>
-            <button type="button" className="ProductBtn" onClick={onClickEtc}>
-              기타
+            <button
+              type="button"
+              className="ProductBtn"
+              onClick={onClickTaxSaving}
+            >
+              절세금융상품
             </button>
           </div>
         </div>

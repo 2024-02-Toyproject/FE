@@ -17,9 +17,9 @@ $blue: #228be6; // 주석 선언
   cursor: pointer;
 
   height: 4.5rem;
-  width: 10rem;
+  width: 13rem;
   font-size: 1.4rem;
-  margin: 10px;
+  margin: 10px 15px;
 
   &:hover {
     background: lighten($blue, 10%); // 색상 10% 밝게

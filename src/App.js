@@ -21,7 +21,7 @@ function App() {
         <Route path="/deposit" element={<DepositPage />} />
         <Route path="/savings" element={<SavingsPage />} />
         <Route path="/loan" element={<LoanPage />} />
-        <Route path="/etc" element={<EtcPage />} />
+        <Route path="/taxSaving" element={<EtcPage />} />
 
         <Route path="/mypage" element={<MyPage />} />
       </Routes>

@@ -20,7 +20,7 @@ export default function LoginPage() {
 
   const onClickLogin = () => {
     axios
-      .post('http://localhost:8080/member/login', {
+      .post('/member/login', {
         id: inputId,
         pw: inputPw,
       })

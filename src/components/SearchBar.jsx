@@ -12,9 +12,15 @@ export default function SearchBar({ onDataTransfer, type }) {
 
   const onClickSearch = () => {
     axios
-      .post(`http://localhost:8080/${type}`, {
-        searchWord: searchWord,
-      })
+      .post(
+        `/${type}`,
+        {
+          searchWord: searchWord,
+        },
+        {
+          withCredentials: true, // 클라이언트와 서버가 통신할때 쿠키와 같은 인증 정보 값을 공유하겠다는 설정
+        }
+      )
       .then((res) => {
         console.log(res.data);
         onDataTransfer(res.data); //콜백 함수 호출하여 데이터 전달

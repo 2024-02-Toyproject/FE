@@ -12,7 +12,7 @@ export default function MyPage() {
 
   const fetchMyData = () => {
     axios
-      .get('/mypage')
+      .get('/member/myPage')
       .then((response) => {
         setMyData(response.data);
       })
