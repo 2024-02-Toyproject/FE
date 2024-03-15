@@ -166,7 +166,7 @@ export default function DepositPage() {
             options={[
               { value: 'joinObjectTitle', name: '가입대상' },
               { value: 'individual', name: '개인' },
-              { value: 'busienss', name: '개인사업자' },
+              { value: 'business', name: '개인사업자' },
               { value: 'corporate', name: '법인' },
               { value: 'nolimit', name: '제한없음' },
             ]}
