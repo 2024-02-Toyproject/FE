@@ -125,25 +125,28 @@ export default function DepositPage() {
         <div>
           <SelectBox
             options={[
-              { value: 'BankTitle', name: '은행' },
-              { value: 'kb', name: '국민은행' },
-              { value: 'kn', name: '경남은행' },
-              { value: 'gj', name: '광주은행' },
-              { value: 'nh', name: '농협은행' },
-              { value: 'dg', name: '대구은행' },
-              { value: 'bs', name: '부산은행' },
-              { value: 'sh', name: '신한은행' },
-              { value: 'suhyup', name: '수협은행' },
-              { value: 'wr', name: '우리은행' },
-              { value: 'ibk', name: '중소기업은행' },
-              { value: 'jb', name: '전북은행' },
-              { value: 'jj', name: '제주은행' },
-              { value: 'kko', name: '카카오뱅크' },
-              { value: 'k', name: '케이뱅크' },
-              { value: 'ts', name: '토스뱅크' },
-              { value: 'hn', name: '하나은행' },
-              { value: 'ksc', name: '한국스탠다드차타드은행' },
-              { value: 'cb', name: '한국씨티은행' },
+              { value: '은행', name: '은행' },
+              { value: '국민은행', name: '국민은행' },
+              { value: '경남은행', name: '경남은행' },
+              { value: '광주은행', name: '광주은행' },
+              { value: '농협은행', name: '농협은행' },
+              { value: '대구은행', name: '대구은행' },
+              { value: '부산은행', name: '부산은행' },
+              { value: '신한은행', name: '신한은행' },
+              { value: '수협은행', name: '수협은행' },
+              { value: '우리은행', name: '우리은행' },
+              { value: '중소기업은행', name: '중소기업은행' },
+              { value: '전북은행', name: '전북은행' },
+              { value: '제주은행', name: '제주은행' },
+              { value: '카카오뱅크', name: '카카오뱅크' },
+              { value: '케이뱅크', name: '케이뱅크' },
+              { value: '토스뱅크', name: '토스뱅크' },
+              { value: '하나은행', name: '하나은행' },
+              {
+                value: '한국스탠다드차타드은행',
+                name: '한국스탠다드차타드은행',
+              },
+              { value: '한국씨티은행', name: '한국씨티은행' },
             ]}
             value={selectedBank}
             onSelectChange={handleBankSelect}
@@ -151,12 +154,12 @@ export default function DepositPage() {
 
           <SelectBox
             options={[
-              { value: 'joinWayTitle', name: '가입방법' },
-              { value: 'store', name: '영업점' },
-              { value: 'internet', name: '인터넷' },
-              { value: 'phone', name: '스마트폰' },
-              { value: 'tele', name: '전화(텔레뱅킹)' },
-              { value: 'etc', name: '기타' },
+              { value: '가입방법', name: '가입방법' },
+              { value: '영업점', name: '영업점' },
+              { value: '인터넷', name: '인터넷' },
+              { value: '스마트폰', name: '스마트폰' },
+              { value: '전화(텔레뱅킹)', name: '전화(텔레뱅킹)' },
+              { value: '기타', name: '기타' },
             ]}
             value={selectedJoinWay}
             onSelectChange={handleJoinWaySelect}
@@ -164,11 +167,11 @@ export default function DepositPage() {
 
           <SelectBox
             options={[
-              { value: 'joinObjectTitle', name: '가입대상' },
-              { value: 'individual', name: '개인' },
-              { value: 'business', name: '개인사업자' },
-              { value: 'corporate', name: '법인' },
-              { value: 'nolimit', name: '제한없음' },
+              { value: '가입대상', name: '가입대상' },
+              { value: '개인', name: '개인' },
+              { value: '개인사업자', name: '개인사업자' },
+              { value: '법인', name: '법인' },
+              { value: '제한없음', name: '제한없음' },
             ]}
             value={selectedJoinObject}
             onSelectChange={handleJoinObjectSelect}
@@ -176,9 +179,9 @@ export default function DepositPage() {
 
           <SelectBox
             options={[
-              { value: 'sortWayTitle', name: '정렬방법' },
-              { value: 'basic', name: '기본금리순' },
-              { value: 'top', name: '최고금리순' },
+              { value: '정렬방법', name: '정렬방법' },
+              { value: '기본금리순', name: '기본금리순' },
+              { value: '최고금리순', name: '최고금리순' },
             ]}
             value={selectedSortWay}
             onSelectChange={handleSortWaySelect}
