@@ -37,12 +37,14 @@ export default function DepositPage() {
   //필터링 요청 시 데이터 출력
   const fetchDepositData = (bank, joinWay, joinObject, sortWay) => {
     axios
+    // 서버로 post 요청 보내는 부분
       .post('/fixedDeposit', {
         bank: bank,
         joinWay: joinWay,
         joinObject: joinObject,
         sortWay: sortWay,
       })
+      // 서버로부터의 응답을 처리하는 부분
       .then((res) => {
         console.log(res.data);
         setDepositList(res.data);
