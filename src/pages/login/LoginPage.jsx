@@ -21,12 +21,16 @@ export default function LoginPage() {
   const onClickLogin = () => {
     axios
       .post('/member/login', {
-        id: inputId,
-        pw: inputPw,
+        memberEmail: inputId,
+        memberPassword: inputPw,
       })
       .then((res) => {
-        console.log(res.data);
-        navigate('/main');
+        if (res.data) {
+          console.log(res.data);
+          navigate('/main');
+        }
+        // console.log(res.data);
+        // navigate('/main');
       })
       .catch((error) => {
         console.log(error, 'error');

@@ -34,66 +34,48 @@ export default function DepositPage() {
     // setDepositLikeList(Array(depositData.length).fill(false));
   };
 
+  useEffect(()=>{
+    fetchDepositData();
+  }, [selectedBank, selectedJoinWay, selectedJoinObject, selectedSortWay])
+
   //필터링 요청 시 데이터 출력
-  const fetchDepositData = (bank, joinWay, joinObject, sortWay) => {
+  const fetchDepositData = () => {
     axios
       .post('/fixedDeposit', {
-        bank: bank,
-        joinWay: joinWay,
-        joinObject: joinObject,
-        sortWay: sortWay,
+        bank: selectedBank,
+        joinWay: selectedJoinWay,
+        joinObject: selectedJoinObject,
+        sortWay: selectedSortWay,
       })
       .then((res) => {
-        console.log(res.data);
-        setDepositList(res.data);
+        // console.log(res.data);
+        setDepositList(res.data.depositProducts);
+        // setDepositLikeList(Array(res.data.length).fill(false));
       })
       .catch((error) => {
         console.log(error, 'error');
       });
   };
 
+
   //은행 필터링 선택
   const handleBankSelect = (e) => {
     setSelectedBank(e.target.value);
-    fetchDepositData(
-      selectedBank,
-      selectedJoinWay,
-      selectedJoinObject,
-      selectedSortWay
-    );
   };
 
   //가입방법 필터링 선택
   const handleJoinWaySelect = (e) => {
     setSelectedJoinWay(e.target.value);
-    fetchDepositData(
-      selectedBank,
-      selectedJoinWay,
-      selectedJoinObject,
-      selectedSortWay
-    );
   };
 
   //가입대상 필터링 선택
   const handleJoinObjectSelect = (e) => {
     setSelctedJoinObject(e.target.value);
-    fetchDepositData(
-      selectedBank,
-      selectedJoinWay,
-      selectedJoinObject,
-      selectedSortWay
-    );
   };
 
   //정렬방법 필터링 선택
   const handleSortWaySelect = (e) => {
     setSelectedSortWay(e.target.value);
-    fetchDepositData(
-      selectedBank,
-      selectedJoinWay,
-      selectedJoinObject,
-      selectedSortWay
-    );
   };
 
   //좋아요 클릭
@@ -122,10 +104,11 @@ export default function DepositPage() {
       <div className="ProductContainer">
         <h1>예금</h1>
         <SearchBar onDataTransfer={handleDepositList} type="fixedDeposit" />
-        <div>
+        <div className="SelectBoxes">
           <SelectBox
             options={[
               { value: '은행', name: '은행' },
+              { value: '전체', name:'전체' },
               { value: '국민은행', name: '국민은행' },
               { value: '경남은행', name: '경남은행' },
               { value: '광주은행', name: '광주은행' },
@@ -155,6 +138,7 @@ export default function DepositPage() {
           <SelectBox
             options={[
               { value: '가입방법', name: '가입방법' },
+              { value: '전체', name:'전체' },
               { value: '영업점', name: '영업점' },
               { value: '인터넷', name: '인터넷' },
               { value: '스마트폰', name: '스마트폰' },
@@ -168,6 +152,7 @@ export default function DepositPage() {
           <SelectBox
             options={[
               { value: '가입대상', name: '가입대상' },
+              { value: '전체', name:'전체' },
               { value: '개인', name: '개인' },
               { value: '개인사업자', name: '개인사업자' },
               { value: '법인', name: '법인' },
@@ -180,6 +165,7 @@ export default function DepositPage() {
           <SelectBox
             options={[
               { value: '정렬방법', name: '정렬방법' },
+              { value: '전체', name:'전체' },
               { value: '기본금리순', name: '기본금리순' },
               { value: '최고금리순', name: '최고금리순' },
             ]}

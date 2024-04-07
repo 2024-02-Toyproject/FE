@@ -5,15 +5,20 @@
   align-items: center;
 }
 
+.SelectBoxes{
+  margin: 20px 0px;
+}
+
 .ProductTable {
-  margin: 10px 30px;
+  margin: 0px 30px;
 }
 
 th,
 td {
-  padding: 12px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd;
+  font-size: 12px;
+  padding: 10px 2px;
 }
 
 th {
