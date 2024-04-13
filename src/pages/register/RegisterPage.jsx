@@ -47,15 +47,15 @@ export default function RegisterPage() {
   const onClickRegister = () => {
     axios
       .post('/member/save', {
-        id: registerId,
-        pw: registerPw,
-        name: registerName,
+        memberEmail: registerId,
+        memberPassword: registerPw,
+        memberName: registerName,
         gender: registerGender,
-        birthday: registerBday,
+        age: registerBday,
       })
       .then((res) => {
         console.log(res.data);
-        navigate('/main');
+        // navigate('/main');
       })
       .catch((error) => {
         console.log(error, 'error');
@@ -73,7 +73,7 @@ export default function RegisterPage() {
 
         <form>
           <div>
-            <p className="FormTitle">아이디</p>
+            <p className="FormTitle">이메일</p>
             <input
               className="RegisterInputBox"
               type="text"
@@ -144,14 +144,17 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <p className="FormTitle">생년월일</p>
-            <input
-              type="date"
-              name="register_bday"
-              value={registerBday}
-              onChange={handlerRegisterBday}
-              className="RegisterBday"
-            ></input>
+            <p className="FormTitle">나이</p>
+            <div className="RegisterBdayContainer">
+              <input
+                type="text"
+                name="register_bday"
+                value={registerBday}
+                onChange={handlerRegisterBday}
+                className="RegisterBday"
+              ></input>
+              <span>세</span>
+            </div>
           </div>
 
           <div className="RegisterBtn">
