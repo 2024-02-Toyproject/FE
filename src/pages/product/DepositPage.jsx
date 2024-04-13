@@ -34,14 +34,14 @@ export default function DepositPage() {
     // setDepositLikeList(Array(depositData.length).fill(false));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchDepositData();
-  }, [selectedBank, selectedJoinWay, selectedJoinObject, selectedSortWay])
+  }, [selectedBank, selectedJoinWay, selectedJoinObject, selectedSortWay]);
 
   //필터링 요청 시 데이터 출력
   const fetchDepositData = () => {
     axios
-    // 서버로 post 요청 보내는 부분
+      // 서버로 post 요청 보내는 부분
       .post('/fixedDeposit', {
         bank: selectedBank,
         joinWay: selectedJoinWay,
@@ -58,7 +58,6 @@ export default function DepositPage() {
         console.log(error, 'error');
       });
   };
-
 
   //은행 필터링 선택
   const handleBankSelect = (e) => {
@@ -110,7 +109,7 @@ export default function DepositPage() {
           <SelectBox
             options={[
               { value: '은행', name: '은행' },
-              { value: '전체', name:'전체' },
+              { value: '전체', name: '전체' },
               { value: '국민은행', name: '국민은행' },
               { value: '경남은행', name: '경남은행' },
               { value: '광주은행', name: '광주은행' },
@@ -140,7 +139,7 @@ export default function DepositPage() {
           <SelectBox
             options={[
               { value: '가입방법', name: '가입방법' },
-              { value: '전체', name:'전체' },
+              { value: '전체', name: '전체' },
               { value: '영업점', name: '영업점' },
               { value: '인터넷', name: '인터넷' },
               { value: '스마트폰', name: '스마트폰' },
@@ -154,7 +153,7 @@ export default function DepositPage() {
           <SelectBox
             options={[
               { value: '가입대상', name: '가입대상' },
-              { value: '전체', name:'전체' },
+              { value: '전체', name: '전체' },
               { value: '개인', name: '개인' },
               { value: '개인사업자', name: '개인사업자' },
               { value: '법인', name: '법인' },
@@ -167,7 +166,6 @@ export default function DepositPage() {
           <SelectBox
             options={[
               { value: '정렬방법', name: '정렬방법' },
-              { value: '전체', name:'전체' },
               { value: '기본금리순', name: '기본금리순' },
               { value: '최고금리순', name: '최고금리순' },
             ]}
