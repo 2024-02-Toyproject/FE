@@ -22,8 +22,7 @@ export default function SearchBar({ onDataTransfer, type }) {
         }
       )
       .then((res) => {
-        console.log(res.data);
-        onDataTransfer(res.data); //콜백 함수 호출하여 데이터 전달
+        onDataTransfer(res.data.depositProducts); //콜백 함수 호출하여 데이터 전달
       })
       .catch((error) => {
         console.log(error, 'error');
