@@ -7,7 +7,7 @@ import './App.css';
 import DepositPage from './pages/product/DepositPage';
 import SavingsPage from './pages/product/SavingsPage';
 import LoanPage from './pages/product/LoanPage';
-import EtcPage from './pages/product/EtcPage';
+import TaxPage from './pages/product/TaxPage';
 import MyPage from './pages/my/MyPage';
 
 function App() {
@@ -20,8 +20,8 @@ function App() {
 
         <Route path="/deposit" element={<DepositPage />} />
         <Route path="/savings" element={<SavingsPage />} />
-        <Route path="/loan" element={<LoanPage />} />
-        <Route path="/taxSaving" element={<EtcPage />} />
+        <Route path="/creditLoan" element={<LoanPage />} />
+        <Route path="/taxSaving" element={<TaxPage />} />
 
         <Route path="/mypage" element={<MyPage />} />
       </Routes>

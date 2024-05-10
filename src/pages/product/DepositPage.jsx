@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
-import './DepositPage.scss';
 import HeartButton from '../../components/HeartButton';
 import axios from 'axios';
 import SelectBox from '../../components/SelectBox';
+import './DepositPage.scss';
 
 export default function DepositPage() {
   const [depositList, setDepositList] = useState([]);
@@ -34,30 +34,10 @@ export default function DepositPage() {
     // setDepositLikeList(Array(depositData.length).fill(false));
   };
 
+  //필터링 할 때마다 데이터 반영
   useEffect(() => {
     fetchDepositData();
   }, [selectedBank, selectedJoinWay, selectedJoinObject, selectedSortWay]);
-
-  //필터링 요청 시 데이터 출력
-  const fetchDepositData = () => {
-    axios
-      // 서버로 post 요청 보내는 부분
-      .post('/fixedDeposit', {
-        bank: selectedBank,
-        joinWay: selectedJoinWay,
-        joinObject: selectedJoinObject,
-        sortWay: selectedSortWay,
-      })
-      // 서버로부터의 응답을 처리하는 부분
-      .then((res) => {
-        // console.log(res.data);
-        setDepositList(res.data.depositProducts);
-        // setDepositLikeList(Array(res.data.length).fill(false));
-      })
-      .catch((error) => {
-        console.log(error, 'error');
-      });
-  };
 
   //은행 필터링 선택
   const handleBankSelect = (e) => {
@@ -77,6 +57,27 @@ export default function DepositPage() {
   //정렬방법 필터링 선택
   const handleSortWaySelect = (e) => {
     setSelectedSortWay(e.target.value);
+  };
+
+  //필터링 요청 시 데이터 출력 함수
+  const fetchDepositData = () => {
+    axios
+      // 서버로 post 요청 보내는 부분
+      .post('/fixedDeposit', {
+        bank: selectedBank,
+        joinWay: selectedJoinWay,
+        joinObject: selectedJoinObject,
+        sortWay: selectedSortWay,
+      })
+      // 서버로부터의 응답을 처리하는 부분
+      .then((res) => {
+        // console.log(res.data);
+        setDepositList(res.data.depositProducts);
+        // setDepositLikeList(Array(res.data.length).fill(false));
+      })
+      .catch((error) => {
+        console.log(error, 'error');
+      });
   };
 
   //좋아요 클릭
