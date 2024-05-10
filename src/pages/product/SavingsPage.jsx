@@ -204,11 +204,11 @@ export default function SavingsPage() {
                       <td>{savings.joinMethod}</td>
                       <td>{savings.maturityInterestRate}</td>
                       <td>{savings.preferentialConditions}</td>
-                      <td>{savings.joinRestrictions}</td>
+                      <td>{savings.eligibilityRestrictions}</td>
                       <td>{savings.targetCustomers}</td>
                       <td>{savings.maximumLimit}</td>
-                      <td>{savings.interestRateType}</td>
-                      <td>{savings.interestRate}</td>
+                      <td>{savings.savingsInterestRateType}</td>
+                      <td>{savings.savingsInterestRate}</td>
                       <td>{savings.maximumPreferentialRate}</td>
                       <td>
                         <HeartButton
