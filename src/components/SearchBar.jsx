@@ -22,7 +22,12 @@ export default function SearchBar({ onDataTransfer, type }) {
         }
       )
       .then((res) => {
-        onDataTransfer(res.data.depositProducts); //콜백 함수 호출하여 데이터 전달
+        if (type === 'fixedDeposit') {
+          onDataTransfer(res.data.depositProducts); //콜백 함수 호출하여 데이터 전달
+        }
+        if (type === 'saving') {
+          onDataTransfer(res.data.savingProducts);
+        }
       })
       .catch((error) => {
         console.log(error, 'error');

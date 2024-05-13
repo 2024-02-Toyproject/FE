@@ -106,7 +106,7 @@ export default function SavingsPage() {
       <Header />
       <div className="ProductContainer">
         <h1>적금</h1>
-        <SearchBar onDataTransfer={handleSavingsList} type="savings" />
+        <SearchBar onDataTransfer={handleSavingsList} type="saving" />
         <div className="SelectBoxes">
           <SelectBox
             options={[
