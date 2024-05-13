@@ -1,0 +1,26 @@
+.ProductContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.SelectBoxes {
+  margin: 20px 0px;
+}
+
+.ProductTable {
+  margin: 0px 30px;
+}
+
+th,
+td {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-size: 12px;
+  padding: 10px 2px;
+}
+
+th {
+  background-color: #f2f2f2;
+}

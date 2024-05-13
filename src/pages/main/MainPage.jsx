@@ -11,7 +11,7 @@ export default function MainPage() {
     navigate('/savings');
   };
   const onClickLoan = () => {
-    navigate('/loan');
+    navigate('/creditLoan');
   };
   const onClickTaxSaving = () => {
     navigate('/taxSaving');

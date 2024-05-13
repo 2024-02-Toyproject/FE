@@ -20,7 +20,6 @@ export default function SavingsPage() {
     axios
       .get('/saving')
       .then((response) => {
-        // console.log(response.data);
         setSavingsList(response.data);
         setSavingsLikeList(Array(response.data.length).fill(false));
       })
@@ -38,6 +37,7 @@ export default function SavingsPage() {
   //필터링 할 때마다 데이터 반영
   useEffect(() => {
     fetchSavingsData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBank, selectedJoinWay, selectedJoinObject, selectedSortWay]);
 
   //은행 필터링 선택
@@ -181,7 +181,7 @@ export default function SavingsPage() {
               <tr>
                 <th>금융회사명</th>
                 <th>금융상품명</th>
-                <th>가입 방법</th>
+                <th>가입방법</th>
                 <th>만기후 이자율</th>
                 <th>우대조건</th>
                 <th>가입제한</th>

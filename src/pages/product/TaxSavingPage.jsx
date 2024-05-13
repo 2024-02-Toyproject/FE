@@ -4,9 +4,9 @@ import SearchBar from '../../components/SearchBar';
 import HeartButton from '../../components/HeartButton';
 import axios from 'axios';
 import SelectBox from '../../components/SelectBox';
-import './DepositPage.scss';
+import './TaxSavingPage.scss';
 
-export default function DepositPage() {
+export default function TaxSavingPage() {
   const [depositList, setDepositList] = useState([]);
   const [depositLikeList, setDepositLikeList] = useState([]);
 
@@ -72,6 +72,7 @@ export default function DepositPage() {
       })
       // 서버로부터의 응답을 처리하는 부분
       .then((res) => {
+        // console.log(res.data);
         setDepositList(res.data.depositProducts);
         // setDepositLikeList(Array(res.data.length).fill(false));
       })
@@ -104,7 +105,7 @@ export default function DepositPage() {
     <div>
       <Header />
       <div className="ProductContainer">
-        <h1>예금</h1>
+        <h1>절세금융상품</h1>
         <SearchBar onDataTransfer={handleDepositList} type="fixedDeposit" />
         <div className="SelectBoxes">
           <SelectBox
@@ -180,7 +181,7 @@ export default function DepositPage() {
               <tr>
                 <th>금융회사명</th>
                 <th>금융상품명</th>
-                <th>가입방법</th>
+                <th>가입 방법</th>
                 <th>만기후 이자율</th>
                 <th>우대조건</th>
                 <th>가입제한</th>

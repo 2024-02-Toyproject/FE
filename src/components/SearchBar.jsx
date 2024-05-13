@@ -28,6 +28,10 @@ export default function SearchBar({ onDataTransfer, type }) {
         if (type === 'saving') {
           onDataTransfer(res.data.savingProducts);
         }
+        if (type === 'creditLoan') {
+          console.log(res);
+          onDataTransfer(res.data.loanProducts);
+        }
       })
       .catch((error) => {
         console.log(error, 'error');
