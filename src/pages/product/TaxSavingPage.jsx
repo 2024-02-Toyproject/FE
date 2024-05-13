@@ -3,25 +3,19 @@ import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import HeartButton from '../../components/HeartButton';
 import axios from 'axios';
-import SelectBox from '../../components/SelectBox';
 import './TaxSavingPage.scss';
 
 export default function TaxSavingPage() {
-  const [depositList, setDepositList] = useState([]);
-  const [depositLikeList, setDepositLikeList] = useState([]);
-
-  const [selectedBank, setSelectedBank] = useState('');
-  const [selectedJoinWay, setSelectedJoinWay] = useState('');
-  const [selectedJoinObject, setSelctedJoinObject] = useState('');
-  const [selectedSortWay, setSelectedSortWay] = useState('');
+  const [taxSavingList, setTaxSavingList] = useState([]);
+  const [taxSavingLikeList, setTaxSavingLikeList] = useState([]);
 
   //초기 테이블에 모든 데이터 출력
   useEffect(() => {
     axios
-      .get('/fixedDeposit')
+      .get('/taxSaving')
       .then((response) => {
-        setDepositList(response.data);
-        setDepositLikeList(Array(response.data.length).fill(false));
+        setTaxSavingList(response.data);
+        setTaxSavingLikeList(Array(response.data.length).fill(false));
       })
       .catch((error) => {
         console.log(error);
@@ -29,74 +23,27 @@ export default function TaxSavingPage() {
   }, []);
 
   //검색 요청 시 데이터 출력
-  const handleDepositList = (depositData) => {
-    setDepositList(depositData);
+  const handleTaxSavingList = (taxSavingData) => {
+    setTaxSavingList(taxSavingData);
     // setDepositLikeList(Array(depositData.length).fill(false));
   };
 
-  //필터링 할 때마다 데이터 반영
-  useEffect(() => {
-    fetchDepositData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedBank, selectedJoinWay, selectedJoinObject, selectedSortWay]);
-
-  //은행 필터링 선택
-  const handleBankSelect = (e) => {
-    setSelectedBank(e.target.value);
-  };
-
-  //가입방법 필터링 선택
-  const handleJoinWaySelect = (e) => {
-    setSelectedJoinWay(e.target.value);
-  };
-
-  //가입대상 필터링 선택
-  const handleJoinObjectSelect = (e) => {
-    setSelctedJoinObject(e.target.value);
-  };
-
-  //정렬방법 필터링 선택
-  const handleSortWaySelect = (e) => {
-    setSelectedSortWay(e.target.value);
-  };
-
-  //필터링 요청 시 데이터 출력 함수
-  const fetchDepositData = () => {
-    axios
-      // 서버로 post 요청 보내는 부분
-      .post('/fixedDeposit', {
-        bank: selectedBank,
-        joinWay: selectedJoinWay,
-        joinObject: selectedJoinObject,
-        sortWay: selectedSortWay,
-      })
-      // 서버로부터의 응답을 처리하는 부분
-      .then((res) => {
-        // console.log(res.data);
-        setDepositList(res.data.depositProducts);
-        // setDepositLikeList(Array(res.data.length).fill(false));
-      })
-      .catch((error) => {
-        console.log(error, 'error');
-      });
-  };
-
   //좋아요 클릭
-  const onClickDepositLike = (index) => {
-    const updatedLikeList = [...depositLikeList];
+  const onClickTaxSavingLike = (index) => {
+    const updatedLikeList = [...taxSavingLikeList];
     updatedLikeList[index] = !updatedLikeList[index];
-    setDepositLikeList(updatedLikeList);
+    setTaxSavingLikeList(updatedLikeList);
 
-    axios
-      .post('/depositLike', {
-        likeIndex: index,
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error, 'error');
-      });
+    // axios
+    //   .post('/depositLike', {
+    //     likeIndex: index,
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error, 'error');
+    //   });
   };
 
   const onClickLink = () => {};
@@ -106,75 +53,7 @@ export default function TaxSavingPage() {
       <Header />
       <div className="ProductContainer">
         <h1>절세금융상품</h1>
-        <SearchBar onDataTransfer={handleDepositList} type="fixedDeposit" />
-        <div className="SelectBoxes">
-          <SelectBox
-            options={[
-              { value: '은행', name: '은행' },
-              { value: '전체', name: '전체' },
-              { value: '국민은행', name: '국민은행' },
-              { value: '경남은행', name: '경남은행' },
-              { value: '광주은행', name: '광주은행' },
-              { value: '농협은행', name: '농협은행' },
-              { value: '대구은행', name: '대구은행' },
-              { value: '부산은행', name: '부산은행' },
-              { value: '신한은행', name: '신한은행' },
-              { value: '수협은행', name: '수협은행' },
-              { value: '우리은행', name: '우리은행' },
-              { value: '중소기업은행', name: '중소기업은행' },
-              { value: '전북은행', name: '전북은행' },
-              { value: '제주은행', name: '제주은행' },
-              { value: '카카오뱅크', name: '카카오뱅크' },
-              { value: '케이뱅크', name: '케이뱅크' },
-              { value: '토스뱅크', name: '토스뱅크' },
-              { value: '하나은행', name: '하나은행' },
-              {
-                value: '한국스탠다드차타드은행',
-                name: '한국스탠다드차타드은행',
-              },
-              { value: '한국씨티은행', name: '한국씨티은행' },
-            ]}
-            value={selectedBank}
-            onSelectChange={handleBankSelect}
-          />
-
-          <SelectBox
-            options={[
-              { value: '가입방법', name: '가입방법' },
-              { value: '전체', name: '전체' },
-              { value: '영업점', name: '영업점' },
-              { value: '인터넷', name: '인터넷' },
-              { value: '스마트폰', name: '스마트폰' },
-              { value: '전화(텔레뱅킹)', name: '전화(텔레뱅킹)' },
-              { value: '기타', name: '기타' },
-            ]}
-            value={selectedJoinWay}
-            onSelectChange={handleJoinWaySelect}
-          />
-
-          <SelectBox
-            options={[
-              { value: '가입대상', name: '가입대상' },
-              { value: '전체', name: '전체' },
-              { value: '개인', name: '개인' },
-              { value: '개인사업자', name: '개인사업자' },
-              { value: '법인', name: '법인' },
-              { value: '제한없음', name: '제한없음' },
-            ]}
-            value={selectedJoinObject}
-            onSelectChange={handleJoinObjectSelect}
-          />
-
-          <SelectBox
-            options={[
-              { value: '정렬방법', name: '정렬방법' },
-              { value: '기본금리순', name: '기본금리순' },
-              { value: '최고금리순', name: '최고금리순' },
-            ]}
-            value={selectedSortWay}
-            onSelectChange={handleSortWaySelect}
-          />
-        </div>
+        <SearchBar onDataTransfer={handleTaxSavingList} type="taxSaving" />
         <div>
           <table className="ProductTable">
             <thead>
@@ -195,25 +74,21 @@ export default function TaxSavingPage() {
               </tr>
             </thead>
             <tbody>
-              {Array.isArray(depositList) &&
-                depositList.map((deposit, index) => {
+              {Array.isArray(taxSavingList) &&
+                taxSavingList.map((taxSaving, index) => {
                   return (
                     <tr key={index}>
-                      <td>{deposit.bankName}</td>
-                      <td>{deposit.productName}</td>
-                      <td>{deposit.joinMethod}</td>
-                      <td>{deposit.maturityInterestRate}</td>
-                      <td>{deposit.preferentialConditions}</td>
-                      <td>{deposit.joinRestrictions}</td>
-                      <td>{deposit.targetCustomers}</td>
-                      <td>{deposit.maximumLimit}</td>
-                      <td>{deposit.interestRateType}</td>
-                      <td>{deposit.interestRate}</td>
-                      <td>{deposit.maximumPreferentialRate}</td>
+                      <td>{taxSaving.financialProduct}</td>
+                      <td>{taxSaving.mainSalesCompany}</td>
+                      <td>{taxSaving.categoryType}</td>
+                      <td>{taxSaving.taxBenefits}</td>
+                      <td>{taxSaving.eligibility}</td>
+                      <td>{taxSaving.subscriptionLimit}</td>
+                      <td>{taxSaving.legalBasis}</td>
                       <td>
                         <HeartButton
-                          like={depositLikeList[index]}
-                          onClick={() => onClickDepositLike(index)}
+                          like={taxSavingLikeList[index]}
+                          onClick={() => onClickTaxSavingLike(index)}
                         />
                       </td>
                       <td>

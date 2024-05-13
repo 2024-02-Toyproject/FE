@@ -32,6 +32,9 @@ export default function SearchBar({ onDataTransfer, type }) {
           console.log(res);
           onDataTransfer(res.data.loanProducts);
         }
+        if (type === 'taxSaving') {
+          onDataTransfer(res.data.taxSavingProducts);
+        }
       })
       .catch((error) => {
         console.log(error, 'error');
