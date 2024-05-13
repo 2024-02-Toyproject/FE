@@ -58,17 +58,13 @@ export default function TaxSavingPage() {
           <table className="ProductTable">
             <thead>
               <tr>
-                <th>금융회사명</th>
-                <th>금융상품명</th>
-                <th>가입 방법</th>
-                <th>만기후 이자율</th>
-                <th>우대조건</th>
-                <th>가입제한</th>
+                <th>금융상품</th>
+                <th>주요판매회사</th>
+                <th>구분</th>
+                <th>세제혜택</th>
                 <th>가입대상</th>
-                <th>최고한도</th>
-                <th>저축금리유형명</th>
-                <th>저축금리</th>
-                <th>최고우대금리</th>
+                <th>가입한도</th>
+                <th>근거법령</th>
                 <th>관심상품등록</th>
                 <th>연결링크</th>
               </tr>
