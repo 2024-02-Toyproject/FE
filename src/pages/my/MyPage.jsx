@@ -4,7 +4,7 @@ import './MyPage.scss';
 import axios from 'axios';
 
 export default function MyPage() {
-  const [myData, setMyData] = useState([]);
+  const [myData, setMyData] = useState({});
 
   useEffect(() => {
     fetchMyData();
@@ -26,11 +26,10 @@ export default function MyPage() {
       <div className="MyPageContainer">
         <h1>마이페이지</h1>
         <p className="CustomerName">
-          <span className="CustomerNameText">{myData.name}</span>님
+          <span className="CustomerNameText">{myData.memberName}</span>님
         </p>
         <p className="CustomerInfo">
-          <span className="CustomerInfoText">{myData.age}</span>
-          세/
+          <span className="CustomerInfoText">{myData.age}</span>세/
           <span className="CustomerInfoText">{myData.gender}</span>
         </p>
         <div className="LikeList">
