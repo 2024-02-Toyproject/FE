@@ -55,7 +55,7 @@ export default function RegisterPage() {
       })
       .then((res) => {
         console.log(res.data);
-        // navigate('/main');
+        navigate('/');
       })
       .catch((error) => {
         console.log(error, 'error');
