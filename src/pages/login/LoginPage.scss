@@ -10,6 +10,13 @@
   font-size: 50px;
 }
 
+.FormContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .InputBox {
   outline: none;
   border: none;
@@ -23,6 +30,12 @@
 }
 .InputBox:focus::placeholder {
   color: transparent;
+}
+
+.WrongText {
+  font-size: 12px;
+  color: red;
+  margin-top: 20px;
 }
 
 .ButtonDiv {

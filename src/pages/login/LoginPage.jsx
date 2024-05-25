@@ -9,6 +9,7 @@ export default function LoginPage() {
 
   const [inputId, setInputId] = useState('');
   const [inputPw, setInputPw] = useState('');
+  const [loginFail, setLoginFail] = useState(false);
 
   const handleInputId = (e) => {
     setInputId(e.target.value);
@@ -29,11 +30,10 @@ export default function LoginPage() {
           console.log(res.data);
           navigate('/main');
         }
-        // console.log(res.data);
-        // navigate('/main');
       })
       .catch((error) => {
         console.log(error, 'error');
+        setLoginFail(true);
       });
   };
 
@@ -45,7 +45,7 @@ export default function LoginPage() {
     <div className="LoginContainer">
       <h1 className="LoginTitle">금융 상품 추천 서비스</h1>
 
-      <form>
+      <form className="FormContainer">
         <div>
           <input
             className="InputBox"
@@ -67,6 +67,12 @@ export default function LoginPage() {
             placeholder="PW"
           ></input>
         </div>
+
+        {loginFail ? (
+          <p className="WrongText">
+            아이디 또는 비밀번호를 잘못 입력했습니다. 다시 확인해주세요.
+          </p>
+        ) : null}
 
         <div className="ButtonDiv">
           <Button text="로그인" onClick={onClickLogin}></Button>
