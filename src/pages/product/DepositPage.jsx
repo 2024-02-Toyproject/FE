@@ -88,7 +88,8 @@ export default function DepositPage() {
 
     axios
       .post('/depositLike', {
-        likeIndex: index,
+        depositId: depositList[index].id, // 관심 상품의 ID
+        like: updatedLikeList[index], // 관심 상태
       })
       .then((res) => {
         console.log(res.data);
