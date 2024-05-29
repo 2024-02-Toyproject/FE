@@ -9,6 +9,7 @@ import './DepositPage.scss';
 export default function DepositPage() {
   const [depositList, setDepositList] = useState([]);
   const [depositLikeList, setDepositLikeList] = useState([]);
+  const [memberData, setMemberData] = useState({});
 
   const [selectedBank, setSelectedBank] = useState('');
   const [selectedJoinWay, setSelectedJoinWay] = useState('');
@@ -22,6 +23,18 @@ export default function DepositPage() {
       .then((response) => {
         setDepositList(response.data);
         setDepositLikeList(Array(response.data.length).fill(false));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  //회원 정보(아이디) 가져오기
+  useEffect(() => {
+    axios
+      .get('/member/myPage')
+      .then((response) => {
+        setMemberData(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -81,15 +94,18 @@ export default function DepositPage() {
   };
 
   //좋아요 클릭
-  const onClickDepositLike = (index) => {
-    const updatedLikeList = [...depositLikeList];
-    updatedLikeList[index] = !updatedLikeList[index];
-    setDepositLikeList(updatedLikeList);
+  const onClickDepositLike = (deposit) => {
+    // const updatedLikeList = [...depositLikeList];
+    // updatedLikeList[index] = !updatedLikeList[index];
+    // setDepositLikeList(updatedLikeList);
 
     axios
       .post('/depositLike', {
-        depositId: depositList[index].id, // 관심 상품의 ID
-        like: updatedLikeList[index], // 관심 상태
+        id: memberData.id,
+        bankName: deposit.bankName, //은행 이름
+        productName: deposit.productName, //상품 이름
+        // depositId: depositList[index].id, // 관심 상품의 ID
+        // like: updatedLikeList[index], // 관심 상태
       })
       .then((res) => {
         console.log(res.data);
@@ -98,8 +114,6 @@ export default function DepositPage() {
         console.log(error, 'error');
       });
   };
-
-  const onClickLink = () => {};
 
   return (
     <div>
@@ -191,7 +205,6 @@ export default function DepositPage() {
                 <th>저축금리</th>
                 <th>최고우대금리</th>
                 <th>관심상품등록</th>
-                <th>연결링크</th>
               </tr>
             </thead>
             <tbody>
@@ -213,13 +226,8 @@ export default function DepositPage() {
                       <td>
                         <HeartButton
                           like={depositLikeList[index]}
-                          onClick={() => onClickDepositLike(index)}
+                          onClick={() => onClickDepositLike(deposit)}
                         />
-                      </td>
-                      <td>
-                        <button type="button" onClick={onClickLink}>
-                          신청하기
-                        </button>
                       </td>
                     </tr>
                   );

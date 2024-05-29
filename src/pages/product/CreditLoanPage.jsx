@@ -98,8 +98,6 @@ export default function CreditLoanPage() {
       });
   };
 
-  const onClickLink = () => {};
-
   return (
     <div>
       <Header />
@@ -185,7 +183,6 @@ export default function CreditLoanPage() {
                 <th>금리구분</th>
                 <th>평균금리</th>
                 <th>관심상품등록</th>
-                <th>연결링크</th>
               </tr>
             </thead>
             <tbody>
@@ -205,11 +202,6 @@ export default function CreditLoanPage() {
                           like={creditLoanLikeList[index]}
                           onClick={() => onClickCreditLoanLike(index)}
                         />
-                      </td>
-                      <td>
-                        <button type="button" onClick={onClickLink}>
-                          신청하기
-                        </button>
                       </td>
                     </tr>
                   );

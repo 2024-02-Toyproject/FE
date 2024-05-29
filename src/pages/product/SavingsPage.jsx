@@ -88,7 +88,7 @@ export default function SavingsPage() {
     setSavingsLikeList(updatedLikeList);
 
     axios
-      .post('/savvingsLike', {
+      .post('/savingsLike', {
         likeIndex: index,
       })
       .then((res) => {
@@ -98,8 +98,6 @@ export default function SavingsPage() {
         console.log(error, 'error');
       });
   };
-
-  const onClickLink = () => {};
 
   return (
     <div>
@@ -191,7 +189,6 @@ export default function SavingsPage() {
                 <th>저축금리</th>
                 <th>최고우대금리</th>
                 <th>관심상품등록</th>
-                <th>연결링크</th>
               </tr>
             </thead>
             <tbody>
@@ -215,11 +212,6 @@ export default function SavingsPage() {
                           like={savingsLikeList[index]}
                           onClick={() => onClickSavingsLike(index)}
                         />
-                      </td>
-                      <td>
-                        <button type="button" onClick={onClickLink}>
-                          신청하기
-                        </button>
                       </td>
                     </tr>
                   );

@@ -35,7 +35,7 @@ export default function TaxSavingPage() {
     setTaxSavingLikeList(updatedLikeList);
 
     // axios
-    //   .post('/depositLike', {
+    //   .post('/taxSavingLike', {
     //     likeIndex: index,
     //   })
     //   .then((res) => {
@@ -45,8 +45,6 @@ export default function TaxSavingPage() {
     //     console.log(error, 'error');
     //   });
   };
-
-  const onClickLink = () => {};
 
   return (
     <div>
@@ -66,7 +64,6 @@ export default function TaxSavingPage() {
                 <th>가입한도</th>
                 <th>근거법령</th>
                 <th>관심상품등록</th>
-                <th>연결링크</th>
               </tr>
             </thead>
             <tbody>
@@ -86,11 +83,6 @@ export default function TaxSavingPage() {
                           like={taxSavingLikeList[index]}
                           onClick={() => onClickTaxSavingLike(index)}
                         />
-                      </td>
-                      <td>
-                        <button type="button" onClick={onClickLink}>
-                          신청하기
-                        </button>
                       </td>
                     </tr>
                   );
