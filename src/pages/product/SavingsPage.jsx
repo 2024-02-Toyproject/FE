@@ -9,6 +9,7 @@ import './SavingsPage.scss';
 export default function SavingsPage() {
   const [savingsList, setSavingsList] = useState([]);
   const [savingsLikeList, setSavingsLikeList] = useState([]);
+  const [memberData, setMemberData] = useState({});
 
   const [selectedBank, setSelectedBank] = useState('');
   const [selectedJoinWay, setSelectedJoinWay] = useState('');
@@ -22,6 +23,18 @@ export default function SavingsPage() {
       .then((response) => {
         setSavingsList(response.data);
         setSavingsLikeList(Array(response.data.length).fill(false));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  //회원 정보(아이디) 가져오기
+  useEffect(() => {
+    axios
+      .get('/member/myPage')
+      .then((response) => {
+        setMemberData(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -82,14 +95,16 @@ export default function SavingsPage() {
   };
 
   //좋아요 클릭
-  const onClickSavingsLike = (index) => {
+  const onClickSavingsLike = (index, savings) => {
     const updatedLikeList = [...savingsLikeList];
     updatedLikeList[index] = !updatedLikeList[index];
     setSavingsLikeList(updatedLikeList);
 
     axios
       .post('/savingsLike', {
-        likeIndex: index,
+        memberId: memberData.memberEmail, //멤버 아이디
+        bankName: savings.company, //은행 이름
+        productName: savings.productName, //상품 이름
       })
       .then((res) => {
         console.log(res.data);
@@ -210,7 +225,7 @@ export default function SavingsPage() {
                       <td>
                         <HeartButton
                           like={savingsLikeList[index]}
-                          onClick={() => onClickSavingsLike(index)}
+                          onClick={() => onClickSavingsLike(index, savings)}
                         />
                       </td>
                     </tr>

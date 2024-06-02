@@ -9,6 +9,7 @@ import './CreditLoanPage.scss';
 export default function CreditLoanPage() {
   const [creditLoanList, setCreditLoanList] = useState([]);
   const [creditLoanLikeList, setCreditLoanLikeList] = useState([]);
+  const [memberData, setMemberData] = useState({});
 
   const [selectedBank, setSelectedBank] = useState('');
   const [selectedJoinWay, setSelectedJoinWay] = useState('');
@@ -22,6 +23,18 @@ export default function CreditLoanPage() {
       .then((response) => {
         setCreditLoanList(response.data);
         setCreditLoanLikeList(Array(response.data.length).fill(false));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  //회원 정보(아이디) 가져오기
+  useEffect(() => {
+    axios
+      .get('/member/myPage')
+      .then((response) => {
+        setMemberData(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -81,14 +94,16 @@ export default function CreditLoanPage() {
   };
 
   //좋아요 클릭
-  const onClickCreditLoanLike = (index) => {
+  const onClickCreditLoanLike = (index, creditLoan) => {
     const updatedLikeList = [...creditLoanLikeList];
     updatedLikeList[index] = !updatedLikeList[index];
     setCreditLoanLikeList(updatedLikeList);
 
     axios
       .post('/creditLoanLike', {
-        likeIndex: index,
+        memberId: memberData.memberEmail, //멤버 아이디
+        bankName: creditLoan.company, //은행 이름
+        productName: creditLoan.productName, //상품 이름
       })
       .then((res) => {
         console.log(res.data);
@@ -200,7 +215,9 @@ export default function CreditLoanPage() {
                       <td>
                         <HeartButton
                           like={creditLoanLikeList[index]}
-                          onClick={() => onClickCreditLoanLike(index)}
+                          onClick={() =>
+                            onClickCreditLoanLike(index, creditLoan)
+                          }
                         />
                       </td>
                     </tr>

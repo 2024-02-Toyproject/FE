@@ -5,6 +5,7 @@ import axios from 'axios';
 
 export default function MyPage() {
   const [myData, setMyData] = useState({});
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     fetchMyData();
@@ -15,11 +16,25 @@ export default function MyPage() {
       .get('/member/myPage')
       .then((response) => {
         setMyData(response.data);
+        fetchFavorites(response.data.memberEmail);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
+  //회원별 관심상품조회
+  const fetchFavorites = (memberEmail) => {
+    axios
+      .get(`/api/favorites/${memberEmail}`)
+      .then((response) => {
+        setFavorites(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <Header />
@@ -34,10 +49,13 @@ export default function MyPage() {
         </p>
         <div className="LikeList">
           <p>❤ 관심 상품 목록 ❤</p>
-          {myData.likelist &&
-            myData.likelist.map((product, key) => {
-              return <li key={key}>{product.name}</li>;
-            })}
+          {favorites.map((favorite) => {
+            return (
+              <li key={favorite.id}>
+                {favorite.bankName}-{favorite.productName}
+              </li>
+            );
+          })}
         </div>
       </div>
     </div>

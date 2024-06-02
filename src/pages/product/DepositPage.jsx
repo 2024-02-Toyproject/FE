@@ -94,10 +94,10 @@ export default function DepositPage() {
   };
 
   //좋아요 클릭
-  const onClickDepositLike = (deposit) => {
-    // const updatedLikeList = [...depositLikeList];
-    // updatedLikeList[index] = !updatedLikeList[index];
-    // setDepositLikeList(updatedLikeList);
+  const onClickDepositLike = (index, deposit) => {
+    const updatedLikeList = [...depositLikeList];
+    updatedLikeList[index] = !updatedLikeList[index];
+    setDepositLikeList(updatedLikeList);
 
     axios
       .post('/depositLike', {
@@ -226,7 +226,7 @@ export default function DepositPage() {
                       <td>
                         <HeartButton
                           like={depositLikeList[index]}
-                          onClick={() => onClickDepositLike(deposit)}
+                          onClick={() => onClickDepositLike(index, deposit)}
                         />
                       </td>
                     </tr>

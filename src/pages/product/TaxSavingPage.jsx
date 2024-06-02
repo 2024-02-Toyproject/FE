@@ -8,6 +8,7 @@ import './TaxSavingPage.scss';
 export default function TaxSavingPage() {
   const [taxSavingList, setTaxSavingList] = useState([]);
   const [taxSavingLikeList, setTaxSavingLikeList] = useState([]);
+  const [memberData, setMemberData] = useState({});
 
   //초기 테이블에 모든 데이터 출력
   useEffect(() => {
@@ -22,6 +23,18 @@ export default function TaxSavingPage() {
       });
   }, []);
 
+  //회원 정보(아이디) 가져오기
+  useEffect(() => {
+    axios
+      .get('/member/myPage')
+      .then((response) => {
+        setMemberData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   //검색 요청 시 데이터 출력
   const handleTaxSavingList = (taxSavingData) => {
     setTaxSavingList(taxSavingData);
@@ -29,21 +42,22 @@ export default function TaxSavingPage() {
   };
 
   //좋아요 클릭
-  const onClickTaxSavingLike = (index) => {
+  const onClickTaxSavingLike = (index, taxSaving) => {
     const updatedLikeList = [...taxSavingLikeList];
     updatedLikeList[index] = !updatedLikeList[index];
     setTaxSavingLikeList(updatedLikeList);
 
-    // axios
-    //   .post('/taxSavingLike', {
-    //     likeIndex: index,
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error, 'error');
-    //   });
+    axios
+      .post('/taxSavingLike', {
+        memberId: memberData.memberEmail, //멤버 아이디
+        productName: taxSaving.financialProduct, //상품 이름
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error, 'error');
+      });
   };
 
   return (
@@ -81,7 +95,7 @@ export default function TaxSavingPage() {
                       <td>
                         <HeartButton
                           like={taxSavingLikeList[index]}
-                          onClick={() => onClickTaxSavingLike(index)}
+                          onClick={() => onClickTaxSavingLike(index, taxSaving)}
                         />
                       </td>
                     </tr>
