@@ -15,8 +15,31 @@ export default function TaxSavingPage() {
     axios
       .get('/taxSaving')
       .then((response) => {
-        setTaxSavingList(response.data);
-        setTaxSavingLikeList(Array(response.data.length).fill(false));
+        const taxSavings = response.data;
+        setTaxSavingList(taxSavings);
+
+        // 회원 정보를 가져온 후 관심 상품 정보도 가져오기
+        axios
+          .get('/member/myPage')
+          .then((response) => {
+            const member = response.data;
+            setMemberData(member);
+
+            // 관심 상품 가져오기
+            return axios.get(`/api/favorites/${member.memberEmail}`);
+          })
+          .then((response) => {
+            const favoriteProducts = response.data;
+            const likeList = taxSavings.map((taxSaving) =>
+              favoriteProducts.some(
+                (fav) => fav.productName === taxSaving.financialProduct
+              )
+            );
+            setTaxSavingLikeList(likeList);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -38,7 +61,6 @@ export default function TaxSavingPage() {
   //검색 요청 시 데이터 출력
   const handleTaxSavingList = (taxSavingData) => {
     setTaxSavingList(taxSavingData);
-    // setDepositLikeList(Array(depositData.length).fill(false));
   };
 
   //좋아요 클릭

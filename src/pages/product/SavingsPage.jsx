@@ -21,8 +21,31 @@ export default function SavingsPage() {
     axios
       .get('/saving')
       .then((response) => {
-        setSavingsList(response.data);
-        setSavingsLikeList(Array(response.data.length).fill(false));
+        const savings = response.data;
+        setSavingsList(savings);
+
+        // 회원 정보를 가져온 후 관심 상품 정보도 가져오기
+        axios
+          .get('/member/myPage')
+          .then((response) => {
+            const member = response.data;
+            setMemberData(member);
+
+            // 관심 상품 가져오기
+            return axios.get(`/api/favorites/${member.memberEmail}`);
+          })
+          .then((response) => {
+            const favoriteProducts = response.data;
+            const likeList = savings.map((saving) =>
+              favoriteProducts.some(
+                (fav) => fav.productName === saving.productName
+              )
+            );
+            setSavingsLikeList(likeList);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -44,7 +67,6 @@ export default function SavingsPage() {
   //검색 요청 시 데이터 출력
   const handleSavingsList = (savingsData) => {
     setSavingsList(savingsData);
-    // setDepositLikeList(Array(depositData.length).fill(false));
   };
 
   //필터링 할 때마다 데이터 반영
@@ -85,9 +107,7 @@ export default function SavingsPage() {
       })
       // 서버로부터의 응답을 처리하는 부분
       .then((res) => {
-        // console.log(res.data);
         setSavingsList(res.data.savingProducts);
-        // setDepositLikeList(Array(res.data.length).fill(false));
       })
       .catch((error) => {
         console.log(error, 'error');

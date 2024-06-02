@@ -21,8 +21,33 @@ export default function CreditLoanPage() {
     axios
       .get('/creditLoan')
       .then((response) => {
-        setCreditLoanList(response.data);
-        setCreditLoanLikeList(Array(response.data.length).fill(false));
+        const creditLoans = response.data;
+        setCreditLoanList(creditLoans);
+
+        // 회원 정보를 가져온 후 관심 상품 정보도 가져오기
+        axios
+          .get('/member/myPage')
+          .then((response) => {
+            const member = response.data;
+            setMemberData(member);
+
+            // 관심 상품 가져오기
+            return axios.get(`/api/favorites/${member.memberEmail}`);
+          })
+          .then((response) => {
+            const favoriteProducts = response.data;
+            const likeList = creditLoans.map((creditLoan) =>
+              favoriteProducts.some(
+                (fav) =>
+                  fav.productName === creditLoan.productName &&
+                  fav.bankName === creditLoan.company
+              )
+            );
+            setCreditLoanLikeList(likeList);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -44,7 +69,6 @@ export default function CreditLoanPage() {
   //검색 요청 시 데이터 출력
   const handleCreditLoanList = (creditLoanData) => {
     setCreditLoanList(creditLoanData);
-    // setDepositLikeList(Array(depositData.length).fill(false));
   };
 
   //필터링 할 때마다 데이터 반영
@@ -86,7 +110,6 @@ export default function CreditLoanPage() {
       // 서버로부터의 응답을 처리하는 부분
       .then((res) => {
         setCreditLoanList(res.data.loanProducts);
-        // setDepositLikeList(Array(res.data.length).fill(false));
       })
       .catch((error) => {
         console.log(error, 'error');

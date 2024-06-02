@@ -21,15 +21,38 @@ export default function DepositPage() {
     axios
       .get('/fixedDeposit')
       .then((response) => {
-        setDepositList(response.data);
-        setDepositLikeList(Array(response.data.length).fill(false));
+        const deposits = response.data;
+        setDepositList(deposits);
+
+        // 회원 정보를 가져온 후 관심 상품 정보도 가져오기
+        axios
+          .get('/member/myPage')
+          .then((response) => {
+            const member = response.data;
+            setMemberData(member);
+
+            // 관심 상품 가져오기
+            return axios.get(`/api/favorites/${member.memberEmail}`);
+          })
+          .then((response) => {
+            const favoriteProducts = response.data;
+            const likeList = deposits.map((deposit) =>
+              favoriteProducts.some(
+                (fav) => fav.productName === deposit.productName
+              )
+            );
+            setDepositLikeList(likeList);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  //회원 정보(아이디) 가져오기
+  // 회원 정보(아이디) 가져오기
   useEffect(() => {
     axios
       .get('/member/myPage')
@@ -44,7 +67,6 @@ export default function DepositPage() {
   //검색 요청 시 데이터 출력
   const handleDepositList = (depositData) => {
     setDepositList(depositData);
-    // setDepositLikeList(Array(depositData.length).fill(false));
   };
 
   //필터링 할 때마다 데이터 반영
@@ -86,7 +108,6 @@ export default function DepositPage() {
       // 서버로부터의 응답을 처리하는 부분
       .then((res) => {
         setDepositList(res.data.depositProducts);
-        // setDepositLikeList(Array(res.data.length).fill(false));
       })
       .catch((error) => {
         console.log(error, 'error');
@@ -104,8 +125,6 @@ export default function DepositPage() {
         memberId: memberData.memberEmail, //멤버 아이디
         bankName: deposit.bankName, //은행 이름
         productName: deposit.productName, //상품 이름
-        // depositId: depositList[index].id, // 관심 상품의 ID
-        // like: updatedLikeList[index], // 관심 상태
       })
       .then((res) => {
         console.log(res.data);
