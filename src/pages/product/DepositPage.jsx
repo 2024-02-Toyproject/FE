@@ -100,7 +100,7 @@ export default function DepositPage() {
     setDepositLikeList(updatedLikeList);
 
     axios
-      .post('/depositLike', {
+      .post('/favorites', {
         memberId: memberData.memberEmail, //멤버 아이디
         bankName: deposit.bankName, //은행 이름
         productName: deposit.productName, //상품 이름

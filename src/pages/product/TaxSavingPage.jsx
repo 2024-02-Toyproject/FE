@@ -48,8 +48,9 @@ export default function TaxSavingPage() {
     setTaxSavingLikeList(updatedLikeList);
 
     axios
-      .post('/taxSavingLike', {
+      .post('/favorites', {
         memberId: memberData.memberEmail, //멤버 아이디
+        bankName: taxSaving.mainSalesCompany, //주요 판매 회사 이름
         productName: taxSaving.financialProduct, //상품 이름
       })
       .then((res) => {

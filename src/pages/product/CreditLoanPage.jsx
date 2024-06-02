@@ -100,7 +100,7 @@ export default function CreditLoanPage() {
     setCreditLoanLikeList(updatedLikeList);
 
     axios
-      .post('/creditLoanLike', {
+      .post('/favorites', {
         memberId: memberData.memberEmail, //멤버 아이디
         bankName: creditLoan.company, //은행 이름
         productName: creditLoan.productName, //상품 이름

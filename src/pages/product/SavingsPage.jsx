@@ -101,7 +101,7 @@ export default function SavingsPage() {
     setSavingsLikeList(updatedLikeList);
 
     axios
-      .post('/savingsLike', {
+      .post('/favorites', {
         memberId: memberData.memberEmail, //멤버 아이디
         bankName: savings.company, //은행 이름
         productName: savings.productName, //상품 이름
