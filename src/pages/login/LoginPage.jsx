@@ -27,7 +27,6 @@ export default function LoginPage() {
       })
       .then((res) => {
         if (res.data) {
-          console.log(res.data);
           navigate('/main');
         }
       })
