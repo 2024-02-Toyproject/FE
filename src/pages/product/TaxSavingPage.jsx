@@ -61,6 +61,22 @@ export default function TaxSavingPage() {
   //검색 요청 시 데이터 출력
   const handleTaxSavingList = (taxSavingData) => {
     setTaxSavingList(taxSavingData);
+
+    // 관심 상품 가져오기
+    axios
+      .get(`/api/favorites/${memberData.memberEmail}`)
+      .then((response) => {
+        const favoriteProducts = response.data;
+        const likeList = taxSavingData.map((taxSaving) =>
+          favoriteProducts.some(
+            (fav) => fav.productName === taxSaving.financialProduct
+          )
+        );
+        setTaxSavingLikeList(likeList);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   //좋아요 클릭

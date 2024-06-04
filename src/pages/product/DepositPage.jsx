@@ -67,6 +67,22 @@ export default function DepositPage() {
   //검색 요청 시 데이터 출력
   const handleDepositList = (depositData) => {
     setDepositList(depositData);
+
+    // 관심 상품 가져오기
+    axios
+      .get(`/api/favorites/${memberData.memberEmail}`)
+      .then((response) => {
+        const favoriteProducts = response.data;
+        const likeList = depositData.map((deposit) =>
+          favoriteProducts.some(
+            (fav) => fav.productName === deposit.productName
+          )
+        );
+        setDepositLikeList(likeList);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   //필터링 할 때마다 데이터 반영
@@ -107,7 +123,24 @@ export default function DepositPage() {
       })
       // 서버로부터의 응답을 처리하는 부분
       .then((res) => {
-        setDepositList(res.data.depositProducts);
+        const deposits = res.data.depositProducts;
+        setDepositList(deposits);
+
+        // 관심 상품 가져오기
+        axios
+          .get(`/api/favorites/${memberData.memberEmail}`)
+          .then((response) => {
+            const favoriteProducts = response.data;
+            const likeList = deposits.map((deposit) =>
+              favoriteProducts.some(
+                (fav) => fav.productName === deposit.productName
+              )
+            );
+            setDepositLikeList(likeList);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error, 'error');

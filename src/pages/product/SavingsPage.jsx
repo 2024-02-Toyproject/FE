@@ -67,6 +67,20 @@ export default function SavingsPage() {
   //검색 요청 시 데이터 출력
   const handleSavingsList = (savingsData) => {
     setSavingsList(savingsData);
+
+    // 관심 상품 가져오기
+    axios
+      .get(`/api/favorites/${memberData.memberEmail}`)
+      .then((response) => {
+        const favoriteProducts = response.data;
+        const likeList = savingsData.map((saving) =>
+          favoriteProducts.some((fav) => fav.productName === saving.productName)
+        );
+        setSavingsLikeList(likeList);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   //필터링 할 때마다 데이터 반영
@@ -107,7 +121,24 @@ export default function SavingsPage() {
       })
       // 서버로부터의 응답을 처리하는 부분
       .then((res) => {
-        setSavingsList(res.data.savingProducts);
+        const savings = res.data.savingProducts;
+        setSavingsList(savings);
+
+        // 관심 상품 가져오기
+        axios
+          .get(`/api/favorites/${memberData.memberEmail}`)
+          .then((response) => {
+            const favoriteProducts = response.data;
+            const likeList = savings.map((saving) =>
+              favoriteProducts.some(
+                (fav) => fav.productName === saving.productName
+              )
+            );
+            setSavingsLikeList(likeList);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error, 'error');
